@@ -24,7 +24,7 @@ public class Map { // removed "extends JFrame"
         // buildMap();
     }
 
-    /*
+    /*//THIS STUFF IS FOR JFRAME - A JAVA GUI THING. BUT IT DIDNT WORK SO ITS BEEN COMMENTED OUT
     public void buildMap(){
         setTitle("Game Map");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
