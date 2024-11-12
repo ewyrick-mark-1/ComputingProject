@@ -1,12 +1,12 @@
 package mapPackage;
 
-//import javax.swing.*;
+import javax.swing.*;
 import people.*;
 import backpackPackage.*;
 import mapPackage.*;
-//import java.awt.*;
+import java.awt.*;
 
-public class Map { // removed "extends JFrame"
+public class Map extends JFrame{ 
     private Tile[][] mapA;
   
     public Map(int t, int a, int b){
@@ -24,14 +24,21 @@ public class Map { // removed "extends JFrame"
         // buildMap();
     }
 
-    /*//THIS STUFF IS FOR JFRAME - A JAVA GUI THING. BUT IT DIDNT WORK SO ITS BEEN COMMENTED OUT
-    public void buildMap(){
+   //THIS STUFF IS FOR JFRAME - A JAVA GUI THING. 
+    public void buildMap() {
+    	int calcX, calcY, preferredSize;
+    	
+    	preferredSize = 50;
+    	
         setTitle("Game Map");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center the window on screen
-        setVisible(true); // Make sure this is called at the right point
-        // setSize(mapA.length * 100, mapA[0].length * 100);
-        addPanel();
+        setLocationRelativeTo(null); // Center the window on the screen
+        
+        addPanel(); // Add the panel with map tiles
+        calcX = getMapX()*preferredSize;
+        calcY = getMapY()*preferredSize;
+        setSize(calcX,calcY); // Automatically sizes the JFrame based on its content
+        setVisible(true); // Set visible after all components are added
     }
     
     private void addPanel(){
@@ -55,9 +62,9 @@ public class Map { // removed "extends JFrame"
         add(mapPanel);
         pack();
     }
-    */
+    
 
-    public String getStrungMap(){
+    public String outputMap(){
         String total = "\n";
         for(Tile[] a : mapA){
             for(Tile b : a){
@@ -65,7 +72,7 @@ public class Map { // removed "extends JFrame"
             }
             total += "\n";
         }
-        // buildMap();
+         buildMap();
         return total;
     }
   

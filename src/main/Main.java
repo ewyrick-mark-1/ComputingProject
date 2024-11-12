@@ -11,13 +11,11 @@ class Main {
   public static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
     
-    theMap = new Map(1, 10, 10); //firsl # is terrain type, #2 is x, #3 is y
-    //theMap.buildMap();  
+    theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
-    a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x coords
+    a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
     b = new Player(theMap);
-    //Frame theFrame = new Frame(theMap.getMap());
-    //MyFrame pretty_map = new MyFrame(theMap);
+    
     getStrung();
       while(true){
         p("\noptions:");
@@ -55,7 +53,7 @@ class Main {
   }
 
   public static void getStrung() {
-    p("map = \n" + theMap.getStrungMap());
+    p("map = \n" + theMap.outputMap());
     p("money a = " + a.getMoney());
     p("money b = " + b.getMoney());
     p("health a = " + a.getHealth());
