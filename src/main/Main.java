@@ -15,7 +15,7 @@ class Main {
     
     a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
     b = new Player(theMap);
-    
+    //test
     getStrung();
       while(true){
         p("\noptions:");
