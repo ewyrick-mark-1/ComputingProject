@@ -55,6 +55,13 @@ public class Map extends JFrame{
                 } else if(c.getTerrain().equals("stone")){
                     tile.setBackground(Color.gray);
                 }
+                if(c.getPlayer() != null) {
+                	ImageIcon pfp = new ImageIcon(getClass().getResource("/resources/emoji angry.jpg"));
+                	Image pfpDisply = pfp.getImage();
+                	Image ScaledPfp = pfpDisply.getScaledInstance(40,40, Image.SCALE_SMOOTH);//Chat gpt helped a lot here
+                	JLabel iconLabel = new JLabel(new ImageIcon(ScaledPfp));
+                    tile.add(iconLabel); // Add the image to the tile
+                }
                 mapPanel.add(tile);
             }
         }
