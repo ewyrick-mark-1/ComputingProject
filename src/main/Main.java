@@ -10,12 +10,12 @@ class Main {
   private static Player b;
   public static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
-    
+    //test
     theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
     a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
     b = new Player(theMap);
-    
+    //test
     getStrung();
       while(true){
         p("\noptions:");
