@@ -21,7 +21,7 @@ class Main {
     
       while(true){
     	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
-
+//CRAXY FROG
     	  //test
         p("\noptions:");
         p("up : move up");
