@@ -22,7 +22,7 @@ class Main {
       while(true){
     	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
 
-    	  
+    	  //test
         p("\noptions:");
         p("up : move up");
         p("down : move down");
