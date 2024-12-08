@@ -1,23 +1,28 @@
 package main;
 
 import java.util.Scanner;
+import javax.swing.*;
 import people.*;
 import backpackPackage.*;
 import mapPackage.*;
 class Main {
   private static Map theMap;
   private static Player a;
-  private static Player b;
+  //private static Player b;
   public static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
     //test
     theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
     a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
-    b = new Player(theMap);
+   // b = new Player(theMap);
     //test
-    getStrung();
+    SwingUtilities.invokeLater(() -> theMap.buildMap(50));
+    
       while(true){
+    	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
+
+    	  
         p("\noptions:");
         p("up : move up");
         p("down : move down");
@@ -55,13 +60,13 @@ class Main {
   public static void getStrung() {
     p("map = \n" + theMap.outputMap());
     p("money a = " + a.getMoney());
-    p("money b = " + b.getMoney());
+    //p("money b = " + b.getMoney());
     p("health a = " + a.getHealth());
-    p("health b = " + b.getHealth());
+    //p("health b = " + b.getHealth());
     p("\nbackpack a = " + a.InvString());
-    p("backpack b = " + b.InvString());
+    //p("backpack b = " + b.InvString());
     p("location a = ("+a.getPY()+", "+a.getPX()+")");
-    p("location b = ("+b.getPY()+", "+b.getPX()+")");
+    //p("location b = ("+b.getPY()+", "+b.getPX()+")");
   }
   
   public static void p(Object g) {

@@ -3,111 +3,111 @@ package mapPackage;
 import javax.swing.*;
 import people.*;
 import backpackPackage.*;
-import mapPackage.*;
 import java.awt.*;
 
-public class Map extends JFrame{ 
+public class Map extends JFrame { 
     private Tile[][] mapA;
-  
-    public Map(int t, int a, int b){
+    private JPanel mapPanel;
+
+    public Map(int t, int a, int b) {
         mapA = new Tile[b][a];
         int ogT = t;
-        for(int y = 0; y < mapA.length; y++){
-            for(int x = 0; x < mapA[0].length; x++){
-                if(Math.random() < 0.2){
-                    t = 2; // random chance to be stone terrain
+        for (int y = 0; y < mapA.length; y++) {
+            for (int x = 0; x < mapA[0].length; x++) {
+                if (Math.random() < 0.2) {
+                    t = 2; // Random chance to be stone terrain
                 }
                 mapA[y][x] = new Tile(t, x, y, null, ((int) (Math.random() * 4)) - 1, new Item(((int) (Math.random() * 2)) + 1));
                 t = ogT;
             }
         }
-        // buildMap();
     }
 
-   //THIS STUFF IS FOR JFRAME - A JAVA GUI THING. 
-    public void buildMap() {
-    	int calcX, calcY, preferredSize;
-    	
-    	preferredSize = 50;
-    	
-        setTitle("Game Map");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center the window on the screen
-        
-        addPanel(); // Add the panel with map tiles
-        calcX = getMapX()*preferredSize;
-        calcY = getMapY()*preferredSize;
-        setSize(calcX,calcY); // Automatically sizes the JFrame based on its content
-        setVisible(true); // Set visible after all components are added
+    public void buildMap(int preferredSize) {
+     
+
+        if (mapPanel == null) { // Initialize only once
+            setTitle("Game Map");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setLocationRelativeTo(null); // Center the window on the screen
+
+            mapPanel = new JPanel(new GridLayout(getMapY(), getMapX()));
+            add(mapPanel);
+
+            setSize(getMapX() * preferredSize, getMapY() * preferredSize);
+            setVisible(true);
+        }
+
+        updateMapPanel(); // Refresh the content of the map
     }
-    
-    private void addPanel(){
-        int x = mapA.length;
-        int y = mapA[0].length;
-        JPanel mapPanel = new JPanel(new GridLayout(x, y));
-        for(Tile[] a : mapA){
-            for(Tile c : a){
+
+    public void updateMapPanel() {
+        mapPanel.removeAll(); // Clear existing components
+        for (Tile[] row : mapA) {
+            for (Tile tileData : row) {
                 JPanel tile = new JPanel();
                 tile.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                tile.setBackground(Color.white);
-                if(c.getTerrain().equals("grass")){
-                    tile.setBackground(Color.green);
-                } else if(c.getTerrain().equals("stone")){
-                    tile.setBackground(Color.gray);
-                }
-                if(c.getPlayer() != null) {
-                	ImageIcon pfp = new ImageIcon(getClass().getResource("/resources/emoji angry.jpg"));
-                	Image pfpDisply = pfp.getImage();
-                	Image ScaledPfp = pfpDisply.getScaledInstance(40,40, Image.SCALE_SMOOTH);//Chat gpt helped a lot here
-                	JLabel iconLabel = new JLabel(new ImageIcon(ScaledPfp));
-                    tile.add(iconLabel); // Add the image to the tile
+
+                // Set tile color based on terrain
+                tile.setBackground("grass".equals(tileData.getTerrain()) ? Color.green : Color.gray);
+
+                // Add player icon if a player is present
+                if (tileData.getPlayer() != null) {
+                    ImageIcon pfp = new ImageIcon(getClass().getResource("/resources/emoji angry.jpg"));
+                    Image pfpDisply = pfp.getImage();
+                    Image ScaledPfp = pfpDisply.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+                    JLabel iconLabel = new JLabel(new ImageIcon(ScaledPfp));
+                    tile.add(iconLabel);
                 }
                 mapPanel.add(tile);
             }
         }
-        mapPanel.setPreferredSize(new Dimension(x * y, y * x));
-        add(mapPanel);
-        pack();
+        mapPanel.revalidate(); // Refresh the panel layout
+        mapPanel.repaint();    // Redraw the panel
     }
-    
 
-    public String outputMap(){
-        String total = "\n";
-        for(Tile[] a : mapA){
-            for(Tile b : a){
-                total += "[ " + b.getTerrain() + " " + b.getY() + " " + b.getX() + " " + PersonNameOrNull(b.getPlayer()) + " " + ItemNameOrNull(b.getStuff()) + " " + b.getMonster() + " ]";
+    public String outputMap() {
+        StringBuilder total = new StringBuilder("\n");
+        for (Tile[] row : mapA) {
+            for (Tile tile : row) {
+                total.append("[ ")
+                     .append(tile.getTerrain()).append(" ")
+                     .append(tile.getY()).append(" ")
+                     .append(tile.getX()).append(" ")
+                     .append(PersonNameOrNull(tile.getPlayer())).append(" ")
+                     .append(ItemNameOrNull(tile.getStuff())).append(" ")
+                     .append(tile.getMonster()).append(" ]");
             }
-            total += "\n";
+            total.append("\n");
         }
-         buildMap();
-        return total;
+        return total.toString();
     }
-  
-    public Tile[][] getMap(){
+
+    public Tile[][] getMap() {
         return mapA;
     }
-  
-    public Tile getTile(int i, int j){
+
+    public Tile getTile(int i, int j) {
         return mapA[i][j];
     }
-  
-    public int getMapY(){
+
+    public int getMapY() {
         return mapA.length;
     }
-  
-    public int getMapX(){
+
+    public int getMapX() {
         return mapA[0].length;
     }
-  
-    public void setMap(int y, int x, Person g){
+
+    public void setMap(int y, int x, Person g) {
         mapA[y][x].setPlayer(g);
         mapA[y][x].setMonster(-1);
     }
-  
+
     private String ItemNameOrNull(Item item) {
         return (item != null) ? item.getName() : null;
     }
-  
+
     private String PersonNameOrNull(Person person) {
         return (person != null) ? person.getName() : null;
     }
