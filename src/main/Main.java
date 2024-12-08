@@ -23,6 +23,8 @@ class Main {
     	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
 //CRAXY FROG
     	  //test
+    	  
+    	  //Nick
         p("\noptions:");
         p("up : move up");
         p("down : move down");
