@@ -21,7 +21,7 @@ class Main {
     
       while(true){
     	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
-//CRAXY FROG YAY
+//CRAXY FROG YAY1
     	  //test
     	  
     	  //Nick
