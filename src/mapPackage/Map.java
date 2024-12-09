@@ -89,7 +89,7 @@ public class Map extends JFrame {
                      .append(tile.getX()).append(" ")
                      .append(PersonNameOrNull(tile.getPlayer())).append(" ")
                      .append(ItemNameOrNull(tile.getStuff())).append(" ")
-                     .append(tile.getMonster()).append(" ]");
+                     .append(tile.getEnemy().getName()).append(" ]");
             }
             total.append("\n");
         }
@@ -114,7 +114,7 @@ public class Map extends JFrame {
 
     public void setMap(int y, int x, Person g) {
         mapA[y][x].setPlayer(g);
-        mapA[y][x].setMonster(-1);
+        mapA[y][x].setEnemy(null);
     }
 
     private String ItemNameOrNull(Item item) {

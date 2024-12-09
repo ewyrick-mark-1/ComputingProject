@@ -50,7 +50,7 @@ public class Tile{
     isPlayer = g;
     enemy = null;
   }
-  public void setMonster(Enemy z){
+  public void setEnemy(Enemy z){
     enemy = z;
   }
   public void setStuff(Item v){
