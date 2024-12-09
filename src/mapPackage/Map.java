@@ -13,24 +13,30 @@ public class Map extends JFrame {
     public Map(int t, int a, int b) {
         mapA = new Tile[b][a];
         int ogT = t;
+
         for (int y = 0; y < mapA.length; y++) {
             for (int x = 0; x < mapA[0].length; x++) {
                 if (Math.random() < 0.2) {
                     t = 2; // Random chance to be stone terrain
                 }
-                
+
+                mapA[y][x] = new Tile(t, x, y, null, null, new Item(((int) (Math.random() * 2)) + 1));
+
                 //------------monster population-------------
                 Enemy enemy = null;
-                
-                int enemyWeight = (int)Math.random()*100 +1; 
-                if(enemyWeight >= 90) {
-                	enemy = new Enemy(100, x, y, this, "zombie", 50, 100);//zombies
-                	
-                }else if(enemyWeight >= 80) {
-                	enemy = new Enemy(50, x, y, this, "skellyton", 50, 100);//skellys
+                int enemyWeight = (int) (Math.random() * 100 + 1); 
+                if (enemyWeight >= 90) {
+                    enemy = new Enemy(100, x, y, this, "zombie", 50, 100); // zombies
+                    mapA[y][x].setEnemy(enemy);
+                } else if (enemyWeight >= 80) {
+                    enemy = new Enemy(50, x, y, this, "skellyton", 50, 100); // skeletons
+                    mapA[y][x].setEnemy(enemy);
                 }
+
+                // Initialize the Tile with its properties
                 
-                mapA[y][x] = new Tile(t, x, y, null, enemy, new Item(((int) (Math.random() * 2)) + 1));
+
+                // Reset terrain type to the original
                 t = ogT;
             }
         }

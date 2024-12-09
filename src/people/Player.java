@@ -10,11 +10,13 @@ public class Player extends Person{
     super(a);
     u = new Backpack(4, 6);//(y, x)
     
+    
   }
   
   public Player(int a, int c, int d, Map f, String p, int atk, int def){
     super(a, c, d, f, p, atk, def);
     u = new Backpack(4, 6);
+    f.getTile(c, d).setPlayer(this); // puts player on map after enemies are added
   }
   //--------------[backpack manipulation]---------------
   public String InvString(){

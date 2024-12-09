@@ -48,7 +48,7 @@ public class Tile{
   }
   public void setPlayer(Person g){
     isPlayer = g;
-    enemy = null;
+    //enemy = null;
   }
   public void setEnemy(Enemy z){
     enemy = z;

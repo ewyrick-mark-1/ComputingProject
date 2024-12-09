@@ -22,7 +22,7 @@ public class Person{
     x = 0;
     y = 0;
     name = "default name";
-    a.setMap(y, x, this);
+    //a.setMap(y, x, this);
   } 
   public Person(int a, int c, int d, Map f, String name, int def, int atk){
     health = a;
@@ -34,7 +34,7 @@ public class Person{
     defense = def;
     
     this.name = name;
-    f.setMap(y, x, this);
+    //f.setMap(y, x, this);
   }
   public int getHealth(){
     return health;

@@ -115,11 +115,15 @@ public class GuiOut {
                 JLabel icon = new JLabel("");
                 if (tile.getPlayer() != null) {
                     icon = new JLabel("P"); // Placeholder for player icon
-                    tilePanel.add(icon);
+                    //tilePanel.add(icon);
+                }else if (tile.getEnemy() == null) {
+                    icon = new JLabel(""); // Placeholder for player icon
+                    //tilePanel.add(icon);
                 }else if (tile.getEnemy().getName() == "zombie") {
                     icon = new JLabel("z"); // Placeholder for player icon
-                    tilePanel.add(icon);
+                    
                 }else if (tile.getEnemy().getName() == "skellyton") {
+                	
                     icon = new JLabel("s"); // Placeholder for player icon
                 }
                     
