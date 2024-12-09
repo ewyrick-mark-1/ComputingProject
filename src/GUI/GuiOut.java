@@ -10,7 +10,7 @@ import backpackPackage.*;
 
 public class GuiOut {
     private JFrame frame;
-    private JPanel mapPanel, inventoryPanel, controlsPanel, statsPanel;
+    private JPanel mapPanel, inventoryPanel, controlsPanel, statsPanel, rightPanel;
     private Map gameMap;
     private Player player;
 
@@ -24,7 +24,8 @@ public class GuiOut {
         frame = new JFrame("Game Interface");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-
+        
+        rightPanel = new JPanel(new BorderLayout());
         // Top-left: Map Panel
         mapPanel = new JPanel(new GridLayout(gameMap.getMapY(), gameMap.getMapX()));
         frame.add(mapPanel, BorderLayout.CENTER);
@@ -32,8 +33,8 @@ public class GuiOut {
         // Right: Inventory Panel
         inventoryPanel = new JPanel();
         inventoryPanel.setBorder(BorderFactory.createTitledBorder("Inventory"));
-        inventoryPanel.setPreferredSize(new Dimension(200, 0));
-        frame.add(inventoryPanel, BorderLayout.EAST);
+        //inventoryPanel.setPreferredSize(new Dimension(200, 10));
+        //frame.add(inventoryPanel, BorderLayout.EAST);
 
         // Bottom-left: Stats Panel
         statsPanel = new JPanel(new GridLayout(1, 3));
@@ -43,8 +44,10 @@ public class GuiOut {
         // Bottom-right: Controls Panel
         controlsPanel = new JPanel(new GridLayout(2, 3));
         controlsPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
-        frame.add(controlsPanel, BorderLayout.WEST);
-
+        //frame.add(controlsPanel, BorderLayout.SOUTH);
+        rightPanel.add(controlsPanel, BorderLayout.SOUTH);
+        rightPanel.add(inventoryPanel, BorderLayout.NORTH);
+        frame.add(rightPanel, BorderLayout.EAST);
         addControlButtons();
         updatePanels();
 
@@ -59,13 +62,13 @@ public class GuiOut {
         JButton rightButton = new JButton("Right");
 
         controlsPanel.add(new JLabel());
-        controlsPanel.add(upButton);
+        controlsPanel.add(upButton, BorderLayout.NORTH);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(leftButton);
+        controlsPanel.add(leftButton, BorderLayout.WEST);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(rightButton);
+        controlsPanel.add(rightButton, BorderLayout.EAST);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(downButton);
+        controlsPanel.add(downButton, BorderLayout.SOUTH);
 
         upButton.addActionListener(e -> movePlayer("up"));
         downButton.addActionListener(e -> movePlayer("down"));
