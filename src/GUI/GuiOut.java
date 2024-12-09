@@ -152,9 +152,13 @@ public class GuiOut {
     private void updateStatsPanel() {
         statsPanel.removeAll();
         JLabel healthLabel = new JLabel("Health: " + player.getHealth());
+        JLabel atkLabel = new JLabel("Attack: " + player.getAtk());
+        JLabel defLabel = new JLabel("Defense: " + player.getDef());
         JLabel locationLabel = new JLabel("Location: (" + player.getPY() + ", " + player.getPX() + ")");
 
         statsPanel.add(healthLabel);
+        statsPanel.add(atkLabel);
+        statsPanel.add(defLabel);
         statsPanel.add(locationLabel);
 
         statsPanel.revalidate();

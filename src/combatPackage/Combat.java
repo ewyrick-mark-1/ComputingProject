@@ -22,13 +22,13 @@ public class Combat {
             
             if (enemy.getHealth() <= 0) {
                 System.out.println(enemy.getName() + " has been defeated!");
-<<<<<<< Updated upstream
-                System.out.println("Removing enemy at coordinates: " + enemy.getPY() + ", " + enemy.getPX());
-=======
-                //Gives stat boost
+
+
+
+                //Givesstat boost
                 player.giveStat(enemy);
 
->>>>>>> Stashed changes
+
                 theMap.getTile(enemy.getPY(), enemy.getPX()).setEnemy(null); // Remove enemy from tile
                 return; // End combat
             }

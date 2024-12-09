@@ -56,14 +56,12 @@ public class Person{
 	  return this.defense;
   }
 
-<<<<<<< Updated upstream
+
   public void setHealth(int health) {
       this.health = health;
   }
-=======
-  public void setHealth(int newHealth) {
-	    this.health = newHealth;
-	}
+
+
   public void setAtk(int newAtk) {
 	    this.attack = newAtk;
 	}
@@ -73,10 +71,10 @@ public class Person{
   
 
 }  
->>>>>>> Stashed changes
+
   
   
-}
+
 
 
 
