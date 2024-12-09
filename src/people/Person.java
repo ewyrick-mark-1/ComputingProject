@@ -37,7 +37,7 @@ public class Person{
     //f.setMap(y, x, this);
   }
   public int getHealth(){
-    return health;
+    return this.health;
   }
   public String getName(){
     return name;
@@ -50,15 +50,30 @@ public class Person{
   }
 
   public int getAtk() {
-	  return attack;
+	  return this.attack;
   }
   public int getDef() {
-	  return defense;
+	  return this.defense;
   }
 
+<<<<<<< Updated upstream
   public void setHealth(int health) {
       this.health = health;
   }
+=======
+  public void setHealth(int newHealth) {
+	    this.health = newHealth;
+	}
+  public void setAtk(int newAtk) {
+	    this.attack = newAtk;
+	}
+  public void setDef(int newDef) {
+	    this.defense = newDef;
+	}
+  
+
+}  
+>>>>>>> Stashed changes
   
   
 }

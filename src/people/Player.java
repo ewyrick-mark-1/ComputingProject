@@ -86,5 +86,18 @@ public Item[] getInventory() {
 	return u.getItems();
 }
 
+public void giveStat(Enemy enemy) {
+    // Custom boost based on enemy type
+    if (enemy.getName().equals("zombie")) {
+        setAtk(getAtk() + 5);
+        System.out.println("Gained +5 Attack from defeating a Zombie!");
+    } else if (enemy.getName().equals("skellyton")) {
+        setDef(getDef() + 3);
+        System.out.println("Gained +3 Defense from defeating a Skellyton!");
+    }
+}
+
+
+
 }
 
