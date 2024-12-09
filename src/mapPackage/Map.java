@@ -95,11 +95,8 @@ public class Map extends JFrame {
                      .append(tile.getX()).append(" ")
                      .append(PersonNameOrNull(tile.getPlayer())).append(" ")
                      .append(ItemNameOrNull(tile.getStuff())).append(" ")
-<<<<<<< HEAD
-                     .append(tile.getEnemy()).append(" ]");
-=======
                      .append(tile.getEnemy().getName()).append(" ]");
->>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
+
             }
             total.append("\n");
         }

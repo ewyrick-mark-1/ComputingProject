@@ -7,34 +7,10 @@ import people.*;
 
 public class Combat {
 
-<<<<<<< HEAD
-
-     public void takeDamage(Person target, int damage, Map theMap) {
-            // Calculate the new health
-            int newHealth = target.getHealth() - damage;
-
-            // Check if the entity has died
-            if (newHealth <= 0) {
-                System.out.println(target.getName() + " took " + damage + " damage and has died!");
-                die(target, theMap); // Call the die method
-            } else {
-                // Update the health and print the remaining health
-                System.out.println(target.getName() + " took " + damage + " damage. Remaining health: " + newHealth);
-                target.setHealth(newHealth); // Ensure the health is updated
-            }
-        }
 
 
-      public void die(Person target, Map theMap) {
-            theMap.getTile(target.getPY(), target.getPX()).setEnemy(null); // Mark no enemy on the tile
-            System.out.println(target.getName() + " has died!");
-        }
+  
 
-
-
-
-
-=======
     public void initializeCombat(Player player, Enemy enemy, Map theMap) {
         System.out.println("Combat initiated between " + player.getName() + " and " + enemy.getName() + "!");
         
@@ -67,6 +43,6 @@ public class Combat {
         System.out.println("Thank you for playing. Exiting...");
         System.exit(0); // Exit the game
     }
->>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
+
 }
 

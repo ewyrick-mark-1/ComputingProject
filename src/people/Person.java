@@ -55,42 +55,15 @@ public class Person{
   public int getDef() {
 	  return defense;
   }
-<<<<<<< HEAD
+
   public void setHealth(int health) {
       this.health = health;
   }
+  
+  
+}
 
 
 
   
   
-  public void takeDamage(int damage) {
-      int newHealth = getHealth() - damage;
-      if (newHealth <= 0) {
-          die();
-      } else {
-          System.out.println(getName() + " took " + damage + " damage. Remaining health: " + newHealth);
-      }
-      // Set the new health
-      
-  }
-=======
->>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
-
-  public void setHealth(int health) {
-	    this.health = health;
-	}
-
-}  
-  
-
-  
-  
-  
-  
-<<<<<<< HEAD
-  
-  
-=======
->>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
-
