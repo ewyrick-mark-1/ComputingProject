@@ -55,6 +55,7 @@ public class Person{
   public int getDef() {
 	  return defense;
   }
+<<<<<<< HEAD
   public void setHealth(int health) {
       this.health = health;
   }
@@ -73,18 +74,23 @@ public class Person{
       // Set the new health
       
   }
+=======
+>>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
 
-  private void die() {
-      System.out.println(getName() + " has died!");
-      
-  }
+  public void setHealth(int health) {
+	    this.health = health;
+	}
+
+}  
   
-  
-}
-  
-  
+
   
   
   
   
+<<<<<<< HEAD
+  
+  
+=======
+>>>>>>> 7956b52ffa56ba7b2bbf0e3e0cd221dc524e46d6
 

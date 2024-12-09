@@ -17,13 +17,16 @@ class Main {
     //test
     theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
-    player = new Player(1, 4, 3, theMap, "john", 100, 50); // a is health & money last two are y & x cords
+    player = new Player(1, 4, 3, theMap, "Loser Elliot", 100, 50); // a is health & money last two are y & x cords
    // b = new Player(theMap);
     //test
     GuiOut gui = new GuiOut(theMap, player);
 
     
       while(true){
+    	  
+    	  
+    	  
     	  gui.refresh();
 
     	  //Nick
