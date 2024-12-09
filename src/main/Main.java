@@ -17,7 +17,7 @@ class Main {
     //test
     theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
-    player = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
+    player = new Player(1, 4, 3, theMap, "john"); // a is health & money last two are y & x cords
    // b = new Player(theMap);
     //test
     GuiOut gui = new GuiOut(theMap, player);
@@ -63,8 +63,7 @@ class Main {
 
   public static void getStrung() {
     p("map = \n" + theMap.outputMap());
-    p("money a = " + player.getMoney());
-    //p("money b = " + b.getMoney());
+   
     p("health a = " + player.getHealth());
     //p("health b = " + b.getHealth());
     p("\nbackpack a = " + player.InvString());
