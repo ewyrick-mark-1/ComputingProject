@@ -48,15 +48,19 @@ public class Person{
   public int getPY(){
     return y;
   }
-<<<<<<< Updated upstream
+
   public int getAtk() {
 	  return attack;
   }
   public int getDef() {
 	  return defense;
   }
-}
-=======
+  public void setHealth(int health) {
+      this.health = health;
+  }
+
+
+
   
   
   public void takeDamage(int damage) {
@@ -83,4 +87,4 @@ public class Person{
   
   
   
->>>>>>> Stashed changes
+

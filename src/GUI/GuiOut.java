@@ -112,7 +112,7 @@ public class GuiOut {
                 tilePanel.setBackground("grass".equals(tile.getTerrain()) ? Color.GREEN : Color.GRAY);
 
                 // Add icon if present
-                JLabel icon;
+                JLabel icon = new JLabel("");
                 if (tile.getPlayer() != null) {
                     icon = new JLabel("P"); // Placeholder for player icon
                     tilePanel.add(icon);
@@ -121,7 +121,7 @@ public class GuiOut {
                     tilePanel.add(icon);
                 }else if (tile.getEnemy().getName() == "skellyton") {
                     icon = new JLabel("s"); // Placeholder for player icon
-                    
+                }
                     
                     tilePanel.add(icon);
 
@@ -130,6 +130,7 @@ public class GuiOut {
         }
         mapPanel.revalidate();
         mapPanel.repaint();
+        
     }
 
     private void updateInventoryPanel() {
