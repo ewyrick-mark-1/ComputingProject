@@ -60,28 +60,9 @@ public class Person{
 	    this.health = health;
 	}
 
+}  
   
-  
-  public void takeDamage(int damage) {
-      int newHealth = getHealth() - damage;
-      if (newHealth <= 0) {
-          die();
-      } else {
-          System.out.println(getName() + " took " + damage + " damage. Remaining health: " + newHealth);
-      }
-      // Set the new health
-      
-  }
 
-  private void die() {
-      System.out.println(getName() + " has died!");
-      
-  }
-  
-  
-}
-  
-  
   
   
   
