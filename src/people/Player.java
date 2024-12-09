@@ -12,8 +12,8 @@ public class Player extends Person{
     
   }
   
-  public Player(int a, int b, int c, int d, Map f, String p){
-    super(a, b, c, d, f, p);
+  public Player(int a, int c, int d, Map f, String p){
+    super(a, c, d, f, p);
     u = new Backpack(4, 6);
   }
   //--------------[backpack manipulation]---------------
