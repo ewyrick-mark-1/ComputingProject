@@ -4,11 +4,12 @@ import javax.swing.*;
 import people.*;
 import backpackPackage.*;
 import java.awt.*;
+import people.*;
 
 public class Map extends JFrame { 
     private Tile[][] mapA;
     private JPanel mapPanel;
-
+    
     public Map(int t, int a, int b) {
         mapA = new Tile[b][a];
         int ogT = t;
@@ -17,7 +18,19 @@ public class Map extends JFrame {
                 if (Math.random() < 0.2) {
                     t = 2; // Random chance to be stone terrain
                 }
-                mapA[y][x] = new Tile(t, x, y, null, ((int) (Math.random() * 4)) - 1, new Item(((int) (Math.random() * 2)) + 1));
+                
+                //------------monster population-------------
+                Enemy enemy = null;
+                
+                int enemyWeight = (int)Math.random()*100 +1; 
+                if(enemyWeight >= 90) {
+                	enemy = new Enemy(100, x, y, this, "zombie", 50, 100);//zombies
+                	
+                }else if(enemyWeight >= 80) {
+                	enemy = new Enemy(50, x, y, this, "skellyton", 50, 100);//skellys
+                }
+                
+                mapA[y][x] = new Tile(t, x, y, null, enemy, new Item(((int) (Math.random() * 2)) + 1));
                 t = ogT;
             }
         }

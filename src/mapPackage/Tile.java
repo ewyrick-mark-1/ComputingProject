@@ -8,12 +8,11 @@ public class Tile{
   private int x;
   private int y;
   private Person isPlayer = null;
-  private int enemyType;
+  private Enemy enemy = null;
   private Item stuff;
-  public Tile(int t, int a, int b, Person c, int d, Item s){
+  public Tile(int t, int a, int b, Person c, Enemy d, Item s){
     x = a;
     y = b;
-    enemyType = d;
     stuff = s;
     if(t == 1){
       terrain = "grass";
@@ -25,6 +24,9 @@ public class Tile{
     if(c != null){
       isPlayer = c;
     }
+    if(d != null){
+        enemy = d;
+      }
   }
   public String getTerrain(){
     return terrain;
@@ -38,18 +40,18 @@ public class Tile{
   public int getY(){
     return y;
   }
-  public int getMonster(){
-    return enemyType;
+  public Enemy getEnemy(){
+    return enemy;
   }
   public Person getPlayer(){
     return isPlayer;
   }
   public void setPlayer(Person g){
     isPlayer = g;
-    enemyType = -1;
+    enemy = null;
   }
-  public void setMonster(int z){
-    enemyType = z;
+  public void setMonster(Enemy z){
+    enemy = z;
   }
   public void setStuff(Item v){
     stuff = v;
