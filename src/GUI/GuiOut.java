@@ -139,11 +139,9 @@ public class GuiOut {
     private void updateStatsPanel() {
         statsPanel.removeAll();
         JLabel healthLabel = new JLabel("Health: " + player.getHealth());
-        JLabel moneyLabel = new JLabel("Money: " + player.getMoney());
         JLabel locationLabel = new JLabel("Location: (" + player.getPY() + ", " + player.getPX() + ")");
 
         statsPanel.add(healthLabel);
-        statsPanel.add(moneyLabel);
         statsPanel.add(locationLabel);
 
         statsPanel.revalidate();
