@@ -111,11 +111,19 @@ public class GuiOut {
                 // Set tile color based on terrain
                 tilePanel.setBackground("grass".equals(tile.getTerrain()) ? Color.GREEN : Color.GRAY);
 
-                // Add player icon if present
+                // Add icon if present
+                JLabel icon;
                 if (tile.getPlayer() != null) {
-                    JLabel playerIcon = new JLabel("P"); // Placeholder for player icon
-                    tilePanel.add(playerIcon);
-                }
+                    icon = new JLabel("P"); // Placeholder for player icon
+                    tilePanel.add(icon);
+                }else if (tile.getEnemy().getName() == "zombie") {
+                    icon = new JLabel("z"); // Placeholder for player icon
+                    tilePanel.add(icon);
+                }else if (tile.getEnemy().getName() == "skellyton") {
+                    icon = new JLabel("s"); // Placeholder for player icon
+                    
+                    
+                    tilePanel.add(icon);
 
                 mapPanel.add(tilePanel);
             }
