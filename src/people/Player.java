@@ -56,6 +56,9 @@ public void moveRight(Map f) {
         f.getMap()[y][x].setPlayer(this);
     }
 }
+public Item[] getInventory() {
+	return u.getItems();
+}
 }
   
 

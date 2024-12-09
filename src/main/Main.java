@@ -5,52 +5,55 @@ import javax.swing.*;
 import people.*;
 import backpackPackage.*;
 import mapPackage.*;
+import GUI.GuiOut;
+
+
 class Main {
   private static Map theMap;
-  private static Player a;
+  private static Player player;
   //private static Player b;
   public static Scanner scan = new Scanner(System.in);
   public static void main(String[] args) {
     //test
     theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
     
-    a = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
+    player = new Player(1, 2, 4, 3, theMap, "john"); // a & b are health & money last two are y & x cords
    // b = new Player(theMap);
     //test
-    SwingUtilities.invokeLater(() -> theMap.buildMap(50));
+    GuiOut gui = new GuiOut(theMap, player);
+
     
       while(true){
-    	  SwingUtilities.invokeLater(() -> theMap.updateMapPanel());
+    	  gui.refresh();
 
-    	  
     	  //Nick
         p("\noptions:");
         p("up : move up");
         p("down : move down");
         p("right : move right");
         p("left : move left");
-        if(theMap.getMap()[a.getPY()][a.getPX()].getStuff() != null){
-          p("harvest "+theMap.getMap()[a.getPY()][a.getPX()].getStuff().getName()+": take");
+        if(theMap.getMap()[player.getPY()][player.getPX()].getStuff() != null){
+          p("harvest "+theMap.getMap()[player.getPY()][player.getPX()].getStuff().getName()+": take");
         }
         String response = scan.nextLine();
         if(response.equals("up")){
-          a.moveUp(theMap);
+        	player.moveUp(theMap);
           getStrung();
         }else if(response.equals("down")){
-          a.moveDown(theMap);
+        	player.moveDown(theMap);
           getStrung();
         }else if(response.equals("right")){
-          a.moveRight(theMap);
+        	player.moveRight(theMap);
           getStrung();
         }else if(response.equals("left")){
-          a.moveLeft(theMap);
+        	player.moveLeft(theMap);
           getStrung();
         }else if(response.equals("add")){
-          a.addInv(new Item("apple", 2));
+        	player.addInv(new Item("apple", 2));
           getStrung();
-        }else if(response.equals("take") && theMap.getMap()[a.getPY()][a.getPX()] != null){
-          a.addInv(theMap.getMap()[a.getPY()][a.getPX()].getStuff());
-          theMap.getMap()[a.getPY()][a.getPX()].setStuff(null);
+        }else if(response.equals("take") && theMap.getMap()[player.getPY()][player.getPX()] != null){
+        	player.addInv(theMap.getMap()[player.getPY()][player.getPX()].getStuff());
+          theMap.getMap()[player.getPY()][player.getPX()].setStuff(null);
           getStrung();
         }else{
           p("invaild, try again.");
@@ -60,13 +63,13 @@ class Main {
 
   public static void getStrung() {
     p("map = \n" + theMap.outputMap());
-    p("money a = " + a.getMoney());
+    p("money a = " + player.getMoney());
     //p("money b = " + b.getMoney());
-    p("health a = " + a.getHealth());
+    p("health a = " + player.getHealth());
     //p("health b = " + b.getHealth());
-    p("\nbackpack a = " + a.InvString());
+    p("\nbackpack a = " + player.InvString());
     //p("backpack b = " + b.InvString());
-    p("location a = ("+a.getPY()+", "+a.getPX()+")");
+    p("location a = ("+player.getPY()+", "+player.getPX()+")");
     //p("location b = ("+b.getPY()+", "+b.getPX()+")");
   }
   

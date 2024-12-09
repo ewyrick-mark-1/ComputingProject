@@ -7,7 +7,7 @@ import java.lang.Math;
 import mapPackage.*;
 
 public class Person{
-  int x;//musnt not be private so player can change coords
+  int x;//musnt be private so player can change coords
   int y;
   private String name;
   private int health;
