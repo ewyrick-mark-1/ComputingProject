@@ -1,5 +1,6 @@
 package people;
 
+import combatPackage.*;
 import backpackPackage.*;
 import mapPackage.*;
 public class Player extends Person{
@@ -30,7 +31,14 @@ public class Player extends Person{
         f.getMap()[y][x].setPlayer(null);
         y--;
         f.getMap()[y][x].setPlayer(this);
+        Enemy enemy = f.getTile(y, x).getEnemy();
+        if (enemy != null) {
+            Combat combat = new Combat();
+            combat.initializeCombat(this, enemy, f);
+        }
     }
+    
+    
 }
 
 public void moveDown(Map f) {
@@ -38,6 +46,12 @@ public void moveDown(Map f) {
         f.getMap()[y][x].setPlayer(null);
         y++;
         f.getMap()[y][x].setPlayer(this);
+        
+        Enemy enemy = f.getTile(y, x).getEnemy();
+        if (enemy != null) {
+            Combat combat = new Combat();
+            combat.initializeCombat(this, enemy, f);
+        }
     }
 }
 
@@ -46,6 +60,11 @@ public void moveLeft(Map f) {
         f.getMap()[y][x].setPlayer(null);
         x--;
         f.getMap()[y][x].setPlayer(this);
+        Enemy enemy = f.getTile(y, x).getEnemy();
+        if (enemy != null) {
+            Combat combat = new Combat();
+            combat.initializeCombat(this, enemy, f);
+        }
     }
 }
 
@@ -54,11 +73,16 @@ public void moveRight(Map f) {
         f.getMap()[y][x].setPlayer(null);
         x++;
         f.getMap()[y][x].setPlayer(this);
+        Enemy enemy = f.getTile(y, x).getEnemy();
+        if (enemy != null) {
+            Combat combat = new Combat();
+            combat.initializeCombat(this, enemy, f);
+        }
     }
 }
 public Item[] getInventory() {
 	return u.getItems();
 }
+
 }
-  
 

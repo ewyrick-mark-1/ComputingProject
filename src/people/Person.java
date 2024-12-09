@@ -34,7 +34,7 @@ public class Person{
     defense = def;
     
     this.name = name;
-    f.setMap(y, x, this);
+    //f.setMap(y, x, this);
   }
   public int getHealth(){
     return health;
