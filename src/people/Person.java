@@ -50,18 +50,31 @@ public class Person{
   }
 
   public int getAtk() {
-	  return attack;
+	  return this.attack;
   }
   public int getDef() {
-	  return defense;
+	  return this.defense;
   }
+
 
   public void setHealth(int health) {
       this.health = health;
   }
+
+
+  public void setAtk(int newAtk) {
+	    this.attack = newAtk;
+	}
+  public void setDef(int newDef) {
+	    this.defense = newDef;
+	}
+  
+
+}  
+
   
   
-}
+
 
 
 

@@ -50,8 +50,8 @@ public class Tile{
     isPlayer = g;
     //enemy = null;
   }
-  public void setEnemy(Enemy z){
-    enemy = z;
+  public void setEnemy(Enemy enemy){
+    this.enemy = enemy;
   }
   public void setStuff(Item v){
     stuff = v;

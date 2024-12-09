@@ -22,6 +22,13 @@ public class Combat {
             
             if (enemy.getHealth() <= 0) {
                 System.out.println(enemy.getName() + " has been defeated!");
+
+
+
+                //Givesstat boost
+                player.giveStat(enemy);
+
+
                 theMap.getTile(enemy.getPY(), enemy.getPX()).setEnemy(null); // Remove enemy from tile
                 return; // End combat
             }
