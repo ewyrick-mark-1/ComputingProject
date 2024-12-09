@@ -48,6 +48,9 @@ public class Combat {
     }
     
 
+
+    
+    
     private void endGame() {
         System.out.println("Thank you for playing. Exiting...");
         System.exit(0); // Exit the game

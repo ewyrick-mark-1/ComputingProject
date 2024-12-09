@@ -22,6 +22,7 @@ class Main {
     //test
     GuiOut gui = new GuiOut(theMap, player);
 
+    theMap.getTile(player.getPY(), player.getPX()).setPlayerFirst(player);
     
       while(true){
     	  

@@ -26,10 +26,12 @@ public class Map extends JFrame {
                 Enemy enemy = null;
                 int enemyWeight = (int) (Math.random() * 100 + 1); 
                 if (enemyWeight >= 90) {
-                    enemy = new Enemy(100, y, x, this, "zombie", 50, 100); // zombies
+
+                    enemy = new Enemy(100, y, x, this, "zombie", 50, 100); 
                     mapA[y][x].setEnemy(enemy);
                 } else if (enemyWeight >= 80) {
-                    enemy = new Enemy(50, y, x, this, "skellyton", 50, 100); // skeletons
+                    enemy = new Enemy(50, y, x, this, "skellyton", 50, 100); 
+
                     mapA[y][x].setEnemy(enemy);
                 }
 

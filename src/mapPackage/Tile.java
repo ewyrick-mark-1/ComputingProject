@@ -50,6 +50,11 @@ public class Tile{
     isPlayer = g;
     //enemy = null;
   }
+  public void setPlayerFirst(Person g){
+	    isPlayer = g;
+	    enemy = null;
+	  }
+
   public void setEnemy(Enemy enemy){
     this.enemy = enemy;
   }
