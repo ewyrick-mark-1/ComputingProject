@@ -10,7 +10,7 @@ public class Tile{
   private Person isPlayer = null;
   private Enemy enemy = null;
   private Item stuff;
-  public Tile(int t, int a, int b, Person c, Enemy d, Item s){
+  public Tile(int t, int b, int a, Person c, Enemy d, Item s){
     x = a;
     y = b;
     stuff = s;
@@ -50,8 +50,8 @@ public class Tile{
     isPlayer = g;
     //enemy = null;
   }
-  public void setEnemy(Enemy z){
-    enemy = z;
+  public void setEnemy(Enemy enemy){
+    this.enemy = enemy;
   }
   public void setStuff(Item v){
     stuff = v;

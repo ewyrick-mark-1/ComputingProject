@@ -20,16 +20,16 @@ public class Map extends JFrame {
                     t = 2; // Random chance to be stone terrain
                 }
 
-                mapA[y][x] = new Tile(t, x, y, null, null, new Item(((int) (Math.random() * 2)) + 1));
+                mapA[y][x] = new Tile(t, y, x, null, null, new Item(((int) (Math.random() * 2)) + 1));
 
                 //------------monster population-------------
                 Enemy enemy = null;
                 int enemyWeight = (int) (Math.random() * 100 + 1); 
                 if (enemyWeight >= 90) {
-                    enemy = new Enemy(100, x, y, this, "zombie", 50, 100); // zombies
+                    enemy = new Enemy(100, y, x, this, "zombie", 50, 100); // zombies
                     mapA[y][x].setEnemy(enemy);
                 } else if (enemyWeight >= 80) {
-                    enemy = new Enemy(50, x, y, this, "skellyton", 50, 100); // skeletons
+                    enemy = new Enemy(50, y, x, this, "skellyton", 50, 100); // skeletons
                     mapA[y][x].setEnemy(enemy);
                 }
 

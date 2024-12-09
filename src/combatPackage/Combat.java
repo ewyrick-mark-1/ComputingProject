@@ -16,18 +16,19 @@ public class Combat {
         
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
             // Player attacks
-            int playerDamage = Math.max(0, player.getAtk() - enemy.getDef());
+            int playerDamage = Math.max(20, player.getAtk() - enemy.getDef());
             enemy.setHealth(enemy.getHealth() - playerDamage);
             System.out.println(player.getName() + " deals " + playerDamage + " damage to " + enemy.getName());
             
             if (enemy.getHealth() <= 0) {
                 System.out.println(enemy.getName() + " has been defeated!");
+                System.out.println("Removing enemy at coordinates: " + enemy.getPY() + ", " + enemy.getPX());
                 theMap.getTile(enemy.getPY(), enemy.getPX()).setEnemy(null); // Remove enemy from tile
                 return; // End combat
             }
 
             // Enemy attacks
-            int enemyDamage = Math.max(0, enemy.getAtk() - player.getDef());
+            int enemyDamage = Math.max(20, enemy.getAtk() - player.getDef());
             player.setHealth(player.getHealth() - enemyDamage);
             System.out.println(enemy.getName() + " deals " + enemyDamage + " damage to " + player.getName());
 
