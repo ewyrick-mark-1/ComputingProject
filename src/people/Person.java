@@ -37,7 +37,7 @@ public class Person{
     //f.setMap(y, x, this);
   }
   public int getHealth(){
-    return health;
+    return this.health;
   }
   public String getName(){
     return name;

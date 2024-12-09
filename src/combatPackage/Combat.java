@@ -16,7 +16,7 @@ public class Combat {
         
         while (player.getHealth() > 0 && enemy.getHealth() > 0) {
             // Player attacks
-            int playerDamage = Math.max(0, player.getAtk() - enemy.getDef());
+            int playerDamage = Math.max(20, player.getAtk() - enemy.getDef());
             enemy.setHealth(enemy.getHealth() - playerDamage);
             System.out.println(player.getName() + " deals " + playerDamage + " damage to " + enemy.getName());
             
@@ -27,7 +27,7 @@ public class Combat {
             }
 
             // Enemy attacks
-            int enemyDamage = Math.max(0, enemy.getAtk() - player.getDef());
+            int enemyDamage = Math.max(20, enemy.getAtk() - player.getDef());
             player.setHealth(player.getHealth() - enemyDamage);
             System.out.println(enemy.getName() + " deals " + enemyDamage + " damage to " + player.getName());
 
@@ -37,7 +37,9 @@ public class Combat {
                 return; // End combat
             }
         }
+        
     }
+    
 
     private void endGame() {
         System.out.println("Thank you for playing. Exiting...");

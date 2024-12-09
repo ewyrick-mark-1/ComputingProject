@@ -52,6 +52,7 @@ public class GuiOut {
         updatePanels();
 
         frame.setSize(800, 600);
+        
         frame.setVisible(true);
     }
 
