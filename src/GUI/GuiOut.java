@@ -9,7 +9,7 @@ import people.*;
 import backpackPackage.*;
 
 public class GuiOut {
-    private JFrame frame;
+    private JPanel mainPanel;
     private JPanel mapPanel, inventoryPanel, controlsPanel, statsPanel, rightPanel;
     private Map gameMap;
     private Player player;
@@ -20,40 +20,37 @@ public class GuiOut {
         createGui();
     }
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
     private void createGui() {
-        frame = new JFrame("Game Interface");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-        
+        mainPanel = new JPanel(new BorderLayout());
+
         rightPanel = new JPanel(new BorderLayout());
+
         // Top-left: Map Panel
         mapPanel = new JPanel(new GridLayout(gameMap.getMapY(), gameMap.getMapX()));
-        frame.add(mapPanel, BorderLayout.CENTER);
+        mainPanel.add(mapPanel, BorderLayout.CENTER);
 
         // Right: Inventory Panel
         inventoryPanel = new JPanel();
         inventoryPanel.setBorder(BorderFactory.createTitledBorder("Inventory"));
-        //inventoryPanel.setPreferredSize(new Dimension(200, 10));
-        //frame.add(inventoryPanel, BorderLayout.EAST);
+        rightPanel.add(inventoryPanel, BorderLayout.NORTH);
 
         // Bottom-left: Stats Panel
         statsPanel = new JPanel(new GridLayout(1, 3));
         statsPanel.setBorder(BorderFactory.createTitledBorder("Player Stats"));
-        frame.add(statsPanel, BorderLayout.SOUTH);
+        mainPanel.add(statsPanel, BorderLayout.SOUTH);
 
         // Bottom-right: Controls Panel
         controlsPanel = new JPanel(new GridLayout(2, 3));
         controlsPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
-        //frame.add(controlsPanel, BorderLayout.SOUTH);
         rightPanel.add(controlsPanel, BorderLayout.SOUTH);
-        rightPanel.add(inventoryPanel, BorderLayout.NORTH);
-        frame.add(rightPanel, BorderLayout.EAST);
+        mainPanel.add(rightPanel, BorderLayout.EAST);
+
         addControlButtons();
         updatePanels();
-
-        frame.setSize(800, 600);
-        
-        frame.setVisible(true);
     }
 
     private void addControlButtons() {
@@ -63,13 +60,13 @@ public class GuiOut {
         JButton rightButton = new JButton("Right");
 
         controlsPanel.add(new JLabel());
-        controlsPanel.add(upButton, BorderLayout.NORTH);
+        controlsPanel.add(upButton);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(leftButton, BorderLayout.WEST);
+        controlsPanel.add(leftButton);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(rightButton, BorderLayout.EAST);
+        controlsPanel.add(rightButton);
         controlsPanel.add(new JLabel());
-        controlsPanel.add(downButton, BorderLayout.SOUTH);
+        controlsPanel.add(downButton);
 
         upButton.addActionListener(e -> movePlayer("up"));
         downButton.addActionListener(e -> movePlayer("down"));
@@ -113,38 +110,32 @@ public class GuiOut {
                 tilePanel.setBackground("grass".equals(tile.getTerrain()) ? Color.GREEN : Color.GRAY);
 
                 // Add icon if present
-                JLabel icon = new JLabel("");
+                JLabel icon = new JLabel();
                 if (tile.getPlayer() != null) {
                     icon = new JLabel("P"); // Placeholder for player icon
-                    //tilePanel.add(icon);
-                }else if (tile.getEnemy() == null) {
-                    icon = new JLabel(""); // Placeholder for player icon
-                    //tilePanel.add(icon);
-                }else if (tile.getEnemy().getName() == "zombie") {
-                    icon = new JLabel("z"); // Placeholder for player icon
-                    
-                }else if (tile.getEnemy().getName() == "skellyton") {
-                	
-                    icon = new JLabel("s"); // Placeholder for player icon
+                } else if (tile.getEnemy() != null) {
+                    if ("zombie".equals(tile.getEnemy().getName())) {
+                        icon = new JLabel("Z");
+                    } else if ("skellyton".equals(tile.getEnemy().getName())) {
+                        icon = new JLabel("S");
+                    }
                 }
-                    
-                    tilePanel.add(icon);
+                tilePanel.add(icon);
 
                 mapPanel.add(tilePanel);
             }
         }
         mapPanel.revalidate();
         mapPanel.repaint();
-        
     }
 
     private void updateInventoryPanel() {
         inventoryPanel.removeAll();
         for (Item item : player.getInventory()) {
-        	if(item != null) {
-            JLabel itemLabel = new JLabel(item.getName() + " x" );
-            inventoryPanel.add(itemLabel);
-        	}
+            if (item != null) {
+                JLabel itemLabel = new JLabel(item.getName());
+                inventoryPanel.add(itemLabel);
+            }
         }
         inventoryPanel.revalidate();
         inventoryPanel.repaint();
@@ -165,10 +156,4 @@ public class GuiOut {
         statsPanel.revalidate();
         statsPanel.repaint();
     }
-    public void refresh() {
-        updateMapPanel();
-        updateInventoryPanel();
-        updateStatsPanel();
-    }
-
 }

@@ -1,87 +1,74 @@
 package main;
-//Test Julian
 
-import java.util.Scanner;
 import javax.swing.*;
+import java.awt.*;
 import people.*;
 import backpackPackage.*;
 import mapPackage.*;
 import GUI.GuiOut;
 
+public class Main {
+    public static void main(String[] args) {
+        // Create the main frame with CardLayout
+        JFrame frame = new JFrame("Top Down - Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
 
-class Main {
-  private static Map theMap;
-  private static Player player;
-  //private static Player b;
-  public static Scanner scan = new Scanner(System.in);
-  public static void main(String[] args) {
-    //test
-    theMap = new Map(1, 5, 5); //first # is terrain type, #2 is x, #3 is y
-    
-    player = new Player(200, 4, 3, theMap, "Loser Elliot", 100, 50); // a is health & money last two are y & x cords
-   // b = new Player(theMap);
-    //test
-    GuiOut gui = new GuiOut(theMap, player);
+        CardLayout cardLayout = new CardLayout();
+        JPanel cardPanel = new JPanel(cardLayout);
 
-    theMap.getTile(player.getPY(), player.getPX()).setPlayerFirst(player);
-    
-      while(true){
-    	  
-    	  
-    	  
-    	  gui.refresh();
+        // Initialize game components
+        Map theMap = new Map(1, 5, 5); // Terrain type, X dimension, Y dimension
+        Player player = new Player(200, 4, 3, theMap, "Loser Elliot", 100, 50); // Player stats and position
+        theMap.getTile(player.getPY(), player.getPX()).setPlayerFirst(player);
 
-    	  //Nick
-        p("\noptions:");
-        p("up : move up");
-        p("down : move down");
-        p("right : move right");
-        p("left : move left");
-        if(theMap.getMap()[player.getPY()][player.getPX()].getStuff() != null){
-          p("harvest "+theMap.getMap()[player.getPY()][player.getPX()].getStuff().getName()+": take");
-        }
-        String response = scan.nextLine();
-        if(response.equals("up")){
-        	player.moveUp(theMap);
-          getStrung();
-        }else if(response.equals("down")){
-        	player.moveDown(theMap);
-          getStrung();
-        }else if(response.equals("right")){
-        	player.moveRight(theMap);
-          getStrung();
-        }else if(response.equals("left")){
-        	player.moveLeft(theMap);
-          getStrung();
-        }else if(response.equals("add")){
-        	player.addInv(new Item("apple", 2));
-          getStrung();
-        }else if(response.equals("take") && theMap.getMap()[player.getPY()][player.getPX()] != null){
-        	player.addInv(theMap.getMap()[player.getPY()][player.getPX()].getStuff());
-          theMap.getMap()[player.getPY()][player.getPX()].setStuff(null);
-          getStrung();
-        }else{
-          p("invaild, try again.");
-        }
-      }
-  }
+        // Create GUI components
+        GuiOut gameGui = new GuiOut(theMap, player);
 
-  public static void getStrung() {
-    p("map = \n" + theMap.outputMap());
-   
-    p("health a = " + player.getHealth());
-    //p("health b = " + b.getHealth());
-    p("\nbackpack a = " + player.InvString());
-    //p("backpack b = " + b.InvString());
-    p("location a = ("+player.getPY()+", "+player.getPX()+")");
-    //p("location b = ("+b.getPY()+", "+b.getPX()+")");
-  }
-  
-  public static void p(Object g) {
-    System.out.println(g);
-  }
+        // Start Screen Panel
+        JPanel startScreenPanel = new JPanel();
+        startScreenPanel.setLayout(new BoxLayout(startScreenPanel, BoxLayout.Y_AXIS));
+        startScreenPanel.setBackground(Color.DARK_GRAY);
+
+        JLabel titleLabel = new JLabel("Top Down");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton startButton = new JButton("Start");
+        JButton exitButton = new JButton("Exit");
+
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        startButton.setMaximumSize(new Dimension(200, 40));
+        exitButton.setMaximumSize(new Dimension(200, 40));
+
+        startButton.addActionListener(e -> cardLayout.show(cardPanel, "GameScreen"));
+        exitButton.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(frame, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
+
+        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
+        startScreenPanel.add(titleLabel);
+        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 30))); // Spacer
+        startScreenPanel.add(startButton);
+        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacer
+        startScreenPanel.add(exitButton);
+
+        // Game Screen Panel
+        JPanel gameScreenPanel = gameGui.getMainPanel();
+
+        // Add panels to CardLayout panel
+        cardPanel.add(startScreenPanel, "StartScreen");
+        cardPanel.add(gameScreenPanel, "GameScreen");
+
+        // Add CardLayout panel to frame
+        frame.add(cardPanel);
+        frame.setVisible(true);
+    }
 }
-
- 
-  
-
