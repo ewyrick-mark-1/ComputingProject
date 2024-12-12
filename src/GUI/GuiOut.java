@@ -175,6 +175,12 @@ public class GuiOut {
     private void updateMapPanel() {
         mapPanel.removeAll();
         Tile[][] tiles = gameMap.getMap();
+        
+        // Load player icon
+        ImageIcon playerIcon = new ImageIcon(getClass().getResource("/resources/emoji angry.jpg"));
+        Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon resizedPlayerIcon = new ImageIcon(scaledPlayerIcon);
+
         for (Tile[] row : tiles) {
             for (Tile tile : row) {
                 JPanel tilePanel = new JPanel();
@@ -186,7 +192,7 @@ public class GuiOut {
                 // Add icon if present
                 JLabel icon = new JLabel();
                 if (tile.getPlayer() != null) {
-                    icon = new JLabel("P"); // Placeholder for player icon
+                    icon = new JLabel(resizedPlayerIcon); // Use player image
                 } else if (tile.getEnemy() != null) {
                     if ("zombie".equals(tile.getEnemy().getName())) {
                         icon = new JLabel("Z");
@@ -202,6 +208,7 @@ public class GuiOut {
         mapPanel.revalidate();
         mapPanel.repaint();
     }
+
 
     private void updateInventoryPanel() {
         inventoryPanel.removeAll();
