@@ -35,8 +35,59 @@ public class Backpack {
             }
         }
     }
+    
+    public boolean basicPotionCheck() {
+        for (int i = 0; i < sack.length && sack[i] != null; i++) {
+            if (sack[i].getIdentifier() == 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean strongPotionCheck() {
+        for (int i = 0; i < sack.length && sack[i] != null; i++) {
+            if (sack[i].getIdentifier() == 5) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public Item[] getItems() {
         return sack;
+    }
+    
+    public Item basicPotionGrabber() { 
+    	for (int i = 0; i < sack.length && sack[i] != null; i++) {
+            if (sack[i].getIdentifier() == 4 ) {
+                return sack[i];
+            }
+        }
+    	return null;
+
+    }
+    public Item strongPotionGrabber() { 
+    	for (int i = 0; i < sack.length && sack[i] != null; i++) {
+            if (sack[i].getIdentifier() == 5 ) {
+                return sack[i];
+            }
+        }
+    	return null;
+
+    }
+
+
+    
+    public void deleteItem(Item goner) {
+    	for (int i = 0; i < sack.length; i++) {
+            if (sack[i].equals(goner)) {
+                sack[i] = null;
+                return;
+            }
+        }
+
     }
 }

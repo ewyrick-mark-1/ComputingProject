@@ -20,7 +20,7 @@ public class Main {
 
         // Initialize game components
         Map theMap = new Map(1, 5, 5); // Terrain type, X dimension, Y dimension
-        Player player = new Player(200, 4, 3, theMap, "Loser Elliot", 100, 50); // Player stats and position
+        Player player = new Player(200, 4, 3, theMap, "Loser Elliot", 100, 50, 200); // Player stats and position
         theMap.getTile(player.getPY(), player.getPX()).setPlayerFirst(player);
 
         // Create GUI components

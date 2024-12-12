@@ -13,6 +13,8 @@ public class GuiOut {
     private JPanel mapPanel, inventoryPanel, controlsPanel, statsPanel, rightPanel;
     private Map gameMap;
     private Player player;
+    private JButton basicPotionButton;
+    private JButton strongPotionButton;
 
     public GuiOut(Map map, Player player) {
         this.gameMap = map;
@@ -59,6 +61,12 @@ public class GuiOut {
         JButton leftButton = new JButton("Left");
         JButton rightButton = new JButton("Right");
         JButton pickUp = new JButton("Pick up");
+        basicPotionButton = new JButton("Use basic potion");
+        strongPotionButton = new JButton("Use strong potion");
+        
+        basicPotionButton.setEnabled(false);
+        strongPotionButton.setEnabled(false);
+
 
 
         controlsPanel.add(new JLabel());
@@ -71,6 +79,10 @@ public class GuiOut {
         controlsPanel.add(downButton);
         controlsPanel.add(new JLabel());
         controlsPanel.add(pickUp);
+        controlsPanel.add(new JLabel());
+        controlsPanel.add(basicPotionButton);
+        controlsPanel.add(strongPotionButton);
+
 
 
         upButton.addActionListener(e -> movePlayer("up"));
@@ -78,6 +90,9 @@ public class GuiOut {
         leftButton.addActionListener(e -> movePlayer("left"));
         rightButton.addActionListener(e -> movePlayer("right"));
         pickUp.addActionListener(e -> pickUp());
+        basicPotionButton.addActionListener(e -> useBasicPotion());
+        strongPotionButton.addActionListener(e -> useStrongPotion());
+
     }
 
     private void movePlayer(String direction) {
@@ -102,6 +117,35 @@ public class GuiOut {
         updateMapPanel();
         updateInventoryPanel();
         updateStatsPanel();
+        updatePotionButton();
+        
+    }
+    
+    public void useBasicPotion() {
+    	player.usePotion(player.getBackpack().basicPotionGrabber());
+    	updatePanels();
+    }
+    public void useStrongPotion() {
+    	player.usePotion(player.getBackpack().strongPotionGrabber());
+    	updatePanels();
+    }
+
+    
+    private void updatePotionButton() {
+    	if(player.getBackpack().basicPotionCheck() == false) {
+    		basicPotionButton.setEnabled(false);
+    	}else {
+    		basicPotionButton.setEnabled(true);
+
+    	}
+    	
+    	if(player.getBackpack().strongPotionCheck() == false) {
+    		strongPotionButton.setEnabled(false);
+    	}else {
+    		strongPotionButton.setEnabled(true);
+
+    	}
+
     }
 
     private void updateMapPanel() {
@@ -162,7 +206,8 @@ public class GuiOut {
         statsPanel.revalidate();
         statsPanel.repaint();
     }
-    private void pickUp() {
+    
+        private void pickUp() {
     	player.pickUpItem(gameMap);
     	inventoryPanel.revalidate();
         inventoryPanel.repaint();
@@ -170,5 +215,6 @@ public class GuiOut {
 
 
     }
+    
 
 }

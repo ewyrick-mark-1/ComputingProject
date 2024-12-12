@@ -6,20 +6,24 @@ import mapPackage.*;
 public class Player extends Person{
   
   Backpack u;
+  Map map;
+  int max_health;
 
   public Player(Map f){
     super(f);
     //Map map = a;
     u = new Backpack(4, 6);//(y, x)
-    Map map = f;
+    map = f;
+    this.max_health = max_health;
     
     
   }
   
-  public Player(int a, int c, int d, Map f, String p, int atk, int def){
+  public Player(int a, int c, int d, Map f, String p, int atk, int def, int max_health){
     super(a, c, d, f, p, atk, def);
     u = new Backpack(4, 6);
-    Map map = f;
+    map = f;
+    this.max_health = max_health;
 
     f.getTile(c, d).setPlayer(this); // puts player on map after enemies are added
   }
@@ -107,6 +111,27 @@ public void pickUpItem(Map map) {
       map.getMap()[this.getPY()][this.getPX()].setStuff(null);
      
 	}
+}
+
+public Backpack getBackpack() {
+	return u;
+}
+
+public void usePotion(Item potion) {
+    System.out.println("Current Health: " + getHealth());
+    System.out.println("Potion Regen: " + potion.getRegen());
+
+    if (getHealth() + potion.getRegen() > max_health) {
+        setHealth(max_health);
+    } else if (getHealth() == max_health) {
+        System.out.println("Health is already at maximum.");
+        return;
+    } else {
+        setHealth(getHealth() + potion.getRegen());
+    }
+
+    u.deleteItem(potion);
+    System.out.println("Potion used. Current Health: " + getHealth());
 }
 
 }

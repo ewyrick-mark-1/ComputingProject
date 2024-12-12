@@ -1,6 +1,7 @@
 package combatPackage;
 
 import mapPackage.*;
+import backpackPackage.*;
 import people.*;
 
 
@@ -27,6 +28,16 @@ public class Combat {
 
                 //Givesstat boost
                 player.giveStat(enemy);
+                
+                //potion odds
+                
+                if(Math.random() > 0.6) {
+                	Item healthPotion = new Item(5);
+                	player.addInv(healthPotion);
+                }else if(Math.random() > 0.3) {
+                	Item healthPotion = new Item(4);
+                	player.addInv(healthPotion);
+                }
 
 
                 theMap.getTile(enemy.getPY(), enemy.getPX()).setEnemy(null); // Remove enemy from tile
