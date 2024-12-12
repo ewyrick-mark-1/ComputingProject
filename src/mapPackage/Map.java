@@ -145,5 +145,15 @@ public class Map extends JFrame {
     private String EnemyNameOrNull(Person person) {
         return (person != null) ? person.getName() : null;
     }
+    public boolean enemyCheck() {
+    	for (Tile[] row : mapA) {
+            for (Tile tile : row) {
+            	if(tile.getEnemy() != null) {
+            		return true;
+            	}
+            }
+        }
+    	return false;
+    }
 
 }
