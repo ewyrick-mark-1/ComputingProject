@@ -8,7 +8,7 @@ import people.*;
 
 public class Combat {
 
-
+int wave = 1;
 
   
 
@@ -41,6 +41,12 @@ public class Combat {
 
 
                 theMap.getTile(enemy.getPY(), enemy.getPX()).setEnemy(null); // Remove enemy from tile
+                
+                if(theMap.enemyCheck() == false) {
+                	System.out.println("enemies dead, next wave immenent");
+                	wave++;
+                	theMap.populate(wave);
+                }
                 return; // End combat
             }
 
@@ -55,6 +61,11 @@ public class Combat {
                 return; // End combat
             }
         }
+        //System.out.println("enemies dead RAAAAAAAH");
+
+        
+        
+        
         
     }
     

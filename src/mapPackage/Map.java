@@ -12,15 +12,6 @@ public class Map extends JFrame {
     
     public Map(int t, int a, int b) {
         mapA = new Tile[b][a];
-        
-        
-        populate(t, 1);
-        
-        
-    }
-    
-    public void populate(int terrain, int wavenumber) {
-    	int t = terrain;
     	int ogT = t;
 
         for (int y = 0; y < mapA.length; y++) {
@@ -30,16 +21,31 @@ public class Map extends JFrame {
                 }
 
                 mapA[y][x] = new Tile(t, y, x, null, null, new Item(((int) (Math.random() * 2)) + 1));
+                 t = ogT;
+            }
+           
+         }
+        
+        populate(1);
+        
+        
+    }
+    
+    public void populate(int wavenumber) {
+    	
+
+        for (int y = 0; y < mapA.length; y++) {
+            for (int x = 0; x < mapA[0].length; x++) {
 
                 //------------monster population-------------
                 Enemy enemy = null;
                 int enemyWeight = (int) (Math.random() * 100 + 1); 
-                if (enemyWeight >= 90) {
+                if (enemyWeight >= 90 - (wavenumber*10)) {
 
-                    enemy = new Enemy(100, y, x, this, "zombie", 50, 100); 
+                    enemy = new Enemy(100, y, x, this, "zombie", 50 + (wavenumber*10), 100); 
                     mapA[y][x].setEnemy(enemy);
-                } else if (enemyWeight >= 80) {
-                    enemy = new Enemy(50, y, x, this, "skellyton", 50, 100); 
+                } else if (enemyWeight >= 80- (wavenumber*10)) {
+                    enemy = new Enemy(50, y, x, this, "skellyton", 50, 100 + (wavenumber*10)); 
 
                     mapA[y][x].setEnemy(enemy);
                 }
@@ -48,7 +54,7 @@ public class Map extends JFrame {
                 
 
                 // Reset terrain type to the original
-                t = ogT;
+              
             }
         }
     }

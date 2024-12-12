@@ -14,7 +14,7 @@ public class Player extends Person{
     //Map map = a;
     u = new Backpack(10);//arg is length of backpack
     map = f;
-    this.max_health = max_health;
+   
     
     
   }
