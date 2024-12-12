@@ -5,10 +5,8 @@ public class Backpack {
     private int rows;
     private int cols;
 
-    public Backpack(int rows, int cols) {
-        this.rows = rows;
-        this.cols = cols;
-        sack = new Item[rows * cols];
+    public Backpack(int length) {
+        sack = new Item[length];
     }
 
     public String SackString() {

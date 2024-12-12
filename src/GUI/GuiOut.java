@@ -10,7 +10,7 @@ import backpackPackage.*;
 
 public class GuiOut {
     private JPanel mainPanel;
-    private JPanel mapPanel, inventoryPanel, controlsPanel, statsPanel, rightPanel;
+    private JPanel mapPanel, inventoryPanel, movementPanel, interactPanel, statsPanel, rightPanel, mainControlPanel;
     private Map gameMap;
     private Player player;
     private JButton basicPotionButton;
@@ -28,17 +28,22 @@ public class GuiOut {
 
     private void createGui() {
         mainPanel = new JPanel(new BorderLayout());
+        //mainPanel.setSize();
 
         rightPanel = new JPanel(new BorderLayout());
+        mainControlPanel = new JPanel(new BorderLayout());
 
         // Top-left: Map Panel
         mapPanel = new JPanel(new GridLayout(gameMap.getMapY(), gameMap.getMapX()));
         mainPanel.add(mapPanel, BorderLayout.CENTER);
 
         // Right: Inventory Panel
-        inventoryPanel = new JPanel();
+        inventoryPanel = new JPanel(); // Initialize before setting the layout
+        inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
         inventoryPanel.setBorder(BorderFactory.createTitledBorder("Inventory"));
         rightPanel.add(inventoryPanel, BorderLayout.NORTH);
+        
+        inventoryPanel.setFont(new Font("Arial", Font.BOLD, 5));
 
         // Bottom-left: Stats Panel
         statsPanel = new JPanel(new GridLayout(1, 3));
@@ -46,9 +51,18 @@ public class GuiOut {
         mainPanel.add(statsPanel, BorderLayout.SOUTH);
 
         // Bottom-right: Controls Panel
-        controlsPanel = new JPanel(new GridLayout(2, 3));
-        controlsPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
-        rightPanel.add(controlsPanel, BorderLayout.SOUTH);
+        interactPanel = new JPanel(new GridLayout(1, 3));
+        interactPanel.setPreferredSize(new Dimension(300, 30));
+        movementPanel = new JPanel(new GridLayout(3, 3));
+        movementPanel.setPreferredSize(new Dimension(300, 275));
+        
+        
+        mainControlPanel.setBorder(BorderFactory.createTitledBorder("Controls"));
+        
+        
+        mainControlPanel.add(movementPanel, BorderLayout.NORTH);
+        mainControlPanel.add(interactPanel, BorderLayout.SOUTH);
+        rightPanel.add(mainControlPanel, BorderLayout.SOUTH);
         mainPanel.add(rightPanel, BorderLayout.EAST);
 
         addControlButtons();
@@ -56,32 +70,42 @@ public class GuiOut {
     }
 
     private void addControlButtons() {
-        JButton upButton = new JButton("Up");
-        JButton downButton = new JButton("Down");
-        JButton leftButton = new JButton("Left");
-        JButton rightButton = new JButton("Right");
+        JButton upButton = new JButton("˄");
+        JButton downButton = new JButton("˅");
+        JButton leftButton = new JButton("˂");
+        JButton rightButton = new JButton("˃");
         JButton pickUp = new JButton("Pick up");
-        basicPotionButton = new JButton("Use basic potion");
-        strongPotionButton = new JButton("Use strong potion");
+        basicPotionButton = new JButton("Basic potion");
+        strongPotionButton = new JButton("Strong potion");
+        
+        upButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        downButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        leftButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        rightButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        
+        pickUp.setFont(new Font("Arial", Font.PLAIN, 10));
+        basicPotionButton.setFont(new Font("Arial", Font.PLAIN, 10));
+        strongPotionButton.setFont(new Font("Arial", Font.PLAIN, 10));
         
         basicPotionButton.setEnabled(false);
         strongPotionButton.setEnabled(false);
+        
 
-
-
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(upButton);
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(leftButton);
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(rightButton);
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(downButton);
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(pickUp);
-        controlsPanel.add(new JLabel());
-        controlsPanel.add(basicPotionButton);
-        controlsPanel.add(strongPotionButton);
+        //movement panel
+        movementPanel.add(new JLabel());
+        movementPanel.add(upButton);
+        movementPanel.add(new JLabel());
+        movementPanel.add(leftButton);
+        movementPanel.add(new JLabel());
+        movementPanel.add(rightButton);
+        movementPanel.add(new JLabel());
+        movementPanel.add(downButton);
+        movementPanel.add(new JLabel());
+        
+        //interact panel
+        interactPanel.add(pickUp);
+        interactPanel.add(basicPotionButton);
+        interactPanel.add(strongPotionButton);
 
 
 

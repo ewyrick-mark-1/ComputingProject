@@ -12,7 +12,7 @@ public class Player extends Person{
   public Player(Map f){
     super(f);
     //Map map = a;
-    u = new Backpack(4, 6);//(y, x)
+    u = new Backpack(10);//arg is length of backpack
     map = f;
     this.max_health = max_health;
     
@@ -21,7 +21,7 @@ public class Player extends Person{
   
   public Player(int a, int c, int d, Map f, String p, int atk, int def, int max_health){
     super(a, c, d, f, p, atk, def);
-    u = new Backpack(4, 6);
+    u = new Backpack(10);
     map = f;
     this.max_health = max_health;
 

@@ -12,7 +12,16 @@ public class Map extends JFrame {
     
     public Map(int t, int a, int b) {
         mapA = new Tile[b][a];
-        int ogT = t;
+        
+        
+        populate(t, 1);
+        
+        
+    }
+    
+    public void populate(int terrain, int wavenumber) {
+    	int t = terrain;
+    	int ogT = t;
 
         for (int y = 0; y < mapA.length; y++) {
             for (int x = 0; x < mapA[0].length; x++) {
