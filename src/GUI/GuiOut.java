@@ -58,6 +58,8 @@ public class GuiOut {
         JButton downButton = new JButton("Down");
         JButton leftButton = new JButton("Left");
         JButton rightButton = new JButton("Right");
+        JButton pickUp = new JButton("Pick up");
+
 
         controlsPanel.add(new JLabel());
         controlsPanel.add(upButton);
@@ -67,11 +69,15 @@ public class GuiOut {
         controlsPanel.add(rightButton);
         controlsPanel.add(new JLabel());
         controlsPanel.add(downButton);
+        controlsPanel.add(new JLabel());
+        controlsPanel.add(pickUp);
+
 
         upButton.addActionListener(e -> movePlayer("up"));
         downButton.addActionListener(e -> movePlayer("down"));
         leftButton.addActionListener(e -> movePlayer("left"));
         rightButton.addActionListener(e -> movePlayer("right"));
+        pickUp.addActionListener(e -> pickUp());
     }
 
     private void movePlayer(String direction) {
@@ -156,4 +162,13 @@ public class GuiOut {
         statsPanel.revalidate();
         statsPanel.repaint();
     }
+    private void pickUp() {
+    	player.pickUpItem(gameMap);
+    	inventoryPanel.revalidate();
+        inventoryPanel.repaint();
+        updatePanels();
+
+
+    }
+
 }

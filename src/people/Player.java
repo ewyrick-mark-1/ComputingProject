@@ -7,9 +7,11 @@ public class Player extends Person{
   
   Backpack u;
 
-  public Player(Map a){
-    super(a);
+  public Player(Map f){
+    super(f);
+    //Map map = a;
     u = new Backpack(4, 6);//(y, x)
+    Map map = f;
     
     
   }
@@ -17,6 +19,8 @@ public class Player extends Person{
   public Player(int a, int c, int d, Map f, String p, int atk, int def){
     super(a, c, d, f, p, atk, def);
     u = new Backpack(4, 6);
+    Map map = f;
+
     f.getTile(c, d).setPlayer(this); // puts player on map after enemies are added
   }
   //--------------[backpack manipulation]---------------
@@ -97,7 +101,13 @@ public void giveStat(Enemy enemy) {
     }
 }
 
-
+public void pickUpItem(Map map) {
+	if(map.getMap()[this.getPY()][this.getPX()] != null){
+    	this.addInv(map.getMap()[this.getPY()][this.getPX()].getStuff());
+      map.getMap()[this.getPY()][this.getPX()].setStuff(null);
+     
+	}
+}
 
 }
 
