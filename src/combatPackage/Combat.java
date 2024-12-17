@@ -57,7 +57,6 @@ int wave = 1;
 
             if (player.getHealth() <= 0) {
                 System.out.println(player.getName() + " has been defeated! GAME OVER.");
-                endGame(); // Call the method to handle game over
                 return; // End combat
             }
         }
@@ -79,4 +78,3 @@ int wave = 1;
     }
 
 }
-
