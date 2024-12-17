@@ -6,6 +6,7 @@ import people.*;
 import backpackPackage.*;
 import mapPackage.*;
 import GUI.GuiOut;
+import GUI.StartScreen;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,48 +28,56 @@ public class Main {
         GuiOut gameGui = new GuiOut(theMap, player);
 
         // Start Screen Panel
-        JPanel startScreenPanel = new JPanel();
-        startScreenPanel.setLayout(new BoxLayout(startScreenPanel, BoxLayout.Y_AXIS));
-        startScreenPanel.setBackground(Color.DARK_GRAY);
-
-        JLabel titleLabel = new JLabel("Top Down");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JButton startButton = new JButton("Start");
-        JButton exitButton = new JButton("Exit");
-
-        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        startButton.setMaximumSize(new Dimension(200, 40));
-        exitButton.setMaximumSize(new Dimension(200, 40));
-
-        startButton.addActionListener(e -> cardLayout.show(cardPanel, "GameScreen"));
-        exitButton.addActionListener(e -> {
-            int confirm = JOptionPane.showConfirmDialog(frame, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                System.exit(0);
-            }
-        });
-
-        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
-        startScreenPanel.add(titleLabel);
-        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 30))); // Spacer
-        startScreenPanel.add(startButton);
-        startScreenPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Spacer
-        startScreenPanel.add(exitButton);
+        StartScreen startScreen = new StartScreen(screenName -> cardLayout.show(cardPanel, screenName));
+        JPanel startScreenPanel = startScreen.getMainPanel();
 
         // Game Screen Panel
         JPanel gameScreenPanel = gameGui.getMainPanel();
 
+        // Death Screen Panel
+        JPanel deathScreenPanel = new JPanel();
+        deathScreenPanel.setLayout(new BoxLayout(deathScreenPanel, BoxLayout.Y_AXIS));
+        deathScreenPanel.setBackground(Color.BLACK);
+
+        JLabel gameOverLabel = new JLabel("GAME OVER");
+        gameOverLabel.setFont(new Font("Arial", Font.BOLD, 36));
+        gameOverLabel.setForeground(Color.RED);
+        gameOverLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton exitDeathButton = new JButton("Exit to Desktop");
+        exitDeathButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitDeathButton.setMaximumSize(new Dimension(200, 40));
+        exitDeathButton.addActionListener(e -> System.exit(0));
+
+        deathScreenPanel.add(Box.createRigidArea(new Dimension(0, 50))); // Spacer
+        deathScreenPanel.add(gameOverLabel);
+        deathScreenPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
+        deathScreenPanel.add(exitDeathButton);
+
         // Add panels to CardLayout panel
         cardPanel.add(startScreenPanel, "StartScreen");
         cardPanel.add(gameScreenPanel, "GameScreen");
+        cardPanel.add(deathScreenPanel, "DeathScreen");
 
         // Add CardLayout panel to frame
         frame.add(cardPanel);
         frame.setVisible(true);
+
+        // Game loop to monitor player's health
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(100); // Check every 100ms
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Check player health
+                if (player.getHealth() <= 0) {
+                    SwingUtilities.invokeLater(() -> cardLayout.show(cardPanel, "DeathScreen"));
+                    break; // Exit loop to stop further checks
+                }
+            }
+        }).start();
     }
 }
