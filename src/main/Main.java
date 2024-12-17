@@ -14,27 +14,27 @@ public class Main {
         JFrame frame = new JFrame("Top Down - Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null); // Center the frame on the screen
+        frame.setLocationRelativeTo(null); // Center the frame
 
         CardLayout cardLayout = new CardLayout();
         JPanel cardPanel = new JPanel(cardLayout);
 
-        // Initialize game components
-        Map theMap = new Map(1, 5, 5); // Terrain type, X dimension, Y dimension
+        // Initialize map and player
+        Map theMap = new Map(1, 5, 5); // Map with 5x5 grid
         Player player = new Player(200, 4, 3, theMap, "Ronald", 100, 50, 200); // Player stats and position
         theMap.getTile(player.getPY(), player.getPX()).setPlayerFirst(player);
 
-        // Create GUI components
+        // Initialize GUI components
         GuiOut gameGui = new GuiOut(theMap, player);
 
-        // Start Screen Panel
+        // Start screen panel
         StartScreen startScreen = new StartScreen(screenName -> cardLayout.show(cardPanel, screenName));
         JPanel startScreenPanel = startScreen.getMainPanel();
 
-        // Game Screen Panel
+        // Game screen panel
         JPanel gameScreenPanel = gameGui.getMainPanel();
 
-        // Death Screen Panel
+        // Death screen panel
         JPanel deathScreenPanel = new JPanel();
         deathScreenPanel.setLayout(new BoxLayout(deathScreenPanel, BoxLayout.Y_AXIS));
         deathScreenPanel.setBackground(Color.BLACK);
@@ -54,7 +54,7 @@ public class Main {
         deathScreenPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
         deathScreenPanel.add(exitDeathButton);
 
-        // Add panels to CardLayout panel
+        // Add panels to CardLayout
         cardPanel.add(startScreenPanel, "StartScreen");
         cardPanel.add(gameScreenPanel, "GameScreen");
         cardPanel.add(deathScreenPanel, "DeathScreen");
@@ -63,7 +63,7 @@ public class Main {
         frame.add(cardPanel);
         frame.setVisible(true);
 
-        // Game loop to monitor player's health
+        // Game loop to check player health
         new Thread(() -> {
             while (true) {
                 try {
@@ -72,10 +72,10 @@ public class Main {
                     e.printStackTrace();
                 }
 
-                // Check player health
+                // Check player health and show death screen if health is zero
                 if (player.getHealth() <= 0) {
                     SwingUtilities.invokeLater(() -> cardLayout.show(cardPanel, "DeathScreen"));
-                    break; // Exit loop to stop further checks
+                    break; // Stop checking once health is zero
                 }
             }
         }).start();
