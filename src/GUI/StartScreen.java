@@ -28,7 +28,7 @@ public class StartScreen {
             }
         });
 
-        // Add components with spacers
+        // Add components 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacer
         mainPanel.add(titleLabel);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 30)));
