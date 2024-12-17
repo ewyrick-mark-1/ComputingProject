@@ -1,5 +1,7 @@
 package GUI;
 
+
+import mapPackage.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -176,10 +178,18 @@ public class GuiOut {
         mapPanel.removeAll();
         Tile[][] tiles = gameMap.getMap();
         
-        // Load player icon
-        ImageIcon playerIcon = new ImageIcon(getClass().getResource("/resources/emoji angry.jpg"));
+        // Load images
+        ImageIcon playerIcon = new ImageIcon(getClass().getResource("/resources/MC.jpg"));
         Image scaledPlayerIcon = playerIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon resizedPlayerIcon = new ImageIcon(scaledPlayerIcon);
+
+        ImageIcon zombieIcon = new ImageIcon(getClass().getResource("/resources/zombie_2.jpg"));
+        Image scaledZombieIcon = zombieIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon resizedZombieIcon = new ImageIcon(scaledZombieIcon);
+
+        ImageIcon skeletonIcon = new ImageIcon(getClass().getResource("/resources/skeleton.jpg"));
+        Image scaledSkeletonIcon = skeletonIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        ImageIcon resizedSkeletonIcon = new ImageIcon(scaledSkeletonIcon);
 
         for (Tile[] row : tiles) {
             for (Tile tile : row) {
@@ -192,12 +202,12 @@ public class GuiOut {
                 // Add icon if present
                 JLabel icon = new JLabel();
                 if (tile.getPlayer() != null) {
-                    icon = new JLabel(resizedPlayerIcon); // Use player image
+                    icon = new JLabel(resizedPlayerIcon); // Player image
                 } else if (tile.getEnemy() != null) {
                     if ("zombie".equals(tile.getEnemy().getName())) {
-                        icon = new JLabel("Z");
+                        icon = new JLabel(resizedZombieIcon); // Zombie image
                     } else if ("skellyton".equals(tile.getEnemy().getName())) {
-                        icon = new JLabel("S");
+                        icon = new JLabel(resizedSkeletonIcon); // Skeleton image
                     }
                 }
                 tilePanel.add(icon);
@@ -208,6 +218,9 @@ public class GuiOut {
         mapPanel.revalidate();
         mapPanel.repaint();
     }
+
+
+
 
 
     private void updateInventoryPanel() {
