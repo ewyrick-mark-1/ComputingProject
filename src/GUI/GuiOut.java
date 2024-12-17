@@ -1,5 +1,7 @@
 package GUI;
 
+
+import mapPackage.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -216,6 +218,8 @@ public class GuiOut {
         mapPanel.revalidate();
         mapPanel.repaint();
     }
+
+
 
 
 
